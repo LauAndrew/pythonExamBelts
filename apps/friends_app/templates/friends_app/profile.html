@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> User Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .wrapper {
+        /* display: flex; */
+        /* margin: auto;  */
+        width: auto;
+        border: 3px solid black;
+        padding: 10px;
+        /* text-align: center;  */
+    }
+    .home {
+        position: fixed;
+        top: 0;
+        left: 700px;
+    }
+    .logout {
+        position: fixed;
+        top: 0;
+        left: 750px;
+    }
+    h4{
+        margin-left: 50px;
+    }
+    
+
+    </style>
+</head>
+    <body>
+        <div class='wrapper'>
+            <div class='profile'>
+                <div class='home'>
+                    <h5><a href='/dashboard'>Home</a></h5>
+                </div>
+                <div class='logout'>
+                    <h5><a href='/logout'>Logout</a></h5>
+                </div>
+            </div>
+            <h3>{{user.alias}}'s Profile</h3>
+            <h4>Name: {{user.name}}</h4>
+            <h4>Email: {{user.email}}</h4>
+        </div>
+    </body>
+</html>

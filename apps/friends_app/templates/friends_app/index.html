@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Welcome Friends! </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .wrapper {
+            display: flex;
+            width: 80%;
+            border: 3px solid black;
+            padding: 10px;
+        }
+        .register{
+            flex: 1;
+        }
+        .login{
+            flex: 1;
+        }
+        .messages {
+            color: red;
+        }
+    </style>
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="register">
+                <h1>Welcome!</h1>
+                <h4>Register</h4>
+                <form action="/main" method="POST">
+                    {% csrf_token %}
+                    <label>Name:</label><input type="text" name="name"><br>
+                    <label>Alias:</label><input type="text" name="alias"><br>
+                    <label>Email:</label><input type="input" name="email"><br>
+                    <label>Password:</label><input type="password" name="password"><br>
+                    <p>*Password should be at least 8 characters</p>
+                    <label>Confirm PW:</label><input type="password" name="confirm_pw"><br>
+                    <label>Date of Birth:</label><input type="date" name="birthdate"><br> 
+                    <input id="button" type="submit" value="Register">
+                </form> 
+            </div>
+            <div class="login">
+                <h4>Login</h4>
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <label>Email:</label><input type="text" name="email"><br>
+                    <label>Password:</label><input type="password" name="password"><br>
+                    <input id="button" type="submit" value="Login">
+                </form>
+                <textbox>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %} 
+                </textbox>  
+            </div>
+        </div>
+    </body>
+</html>

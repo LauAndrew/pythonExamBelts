@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Welcome to your Dashboard </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .wrapper {
+        /* display: flex; */
+        /* margin: auto;  */
+        width: auto;
+        border: 3px solid black;
+        padding: 10px;
+        /* text-align: center;  */
+    }
+    .table{
+        border: 3px solid black;
+        display: inline-block;
+        width: 700px;
+        height: 175px;
+        padding-left: 20px;
+        padding-top: 10px;
+        overflow: scroll;
+    }
+    h4{
+         display: inline-block;
+         margin-left: 30px;
+    }
+    #add{
+        margin-left: 30px;
+    }
+    .header{
+        display: flex;
+    }
+    .nametag{
+        flex: 1;
+    }
+    .logout{
+        
+        flex: 1;
+    }
+    </style>
+</head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <div class="nametag">
+                    <h1>Welcome {{me.alias}}!</h1>
+                </div>
+                <div class='logout'>
+                    <h5><a href='/logout'>Logout</a></h5>
+                </div>
+            </div>
+            {% if friends%}
+                <h2>Here is the list of your friends:</h2>
+            {% else %}
+                <h2>You don't have friends yet:</h2>
+            {% endif %}
+            <div class='table'>
+                <div class='toptable'>
+                    <table>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Action</th>
+                        </tr>
+                            {% for friend in friends %}
+                            <tr>
+                                <td>{{friend.alias}}</td>
+                                <td>
+                                    <a href='/users/{{friend.id}}'><h4 class='inline'>View Profile</h4></a>
+                                    <a href='/users/remove/{{friend.id}}'><h4 class='inline'>Remove as Friend</h4></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <h2>Other Users not on your friend's list:</h2>
+            <div class='table'>
+                <div class='bottom_table'>
+                    <table>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Action</th>
+                        </tr>
+                            {% for user in users %}
+                            <tr>
+                                <td><a href='/users/{{user.id}}'>{{user.alias}}</a></td>
+                                <td>
+                                    <form action='/users/add/{{user.id}}' method='post'>
+                                        {% csrf_token %}
+                                        <input id='add' type='submit' value='Add as Friend'>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
